@@ -1,0 +1,36 @@
+{% extends 'layout/base_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <form id="create_post_form">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>
+                    <label for="post_title">제목:</label>
+                </td>
+                <td>
+                    <input type="text" id="post_title" name="post_title" maxlength="30" required/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="post_cont">내용:</label>
+                </td>
+                <td>
+                    <textarea id="post_cont" name="post_cont" maxlength="200" required></textarea>
+                </td>
+            </tr>
+
+<!--        <div>-->
+<!--            <label for="id_image">이미지:</label>-->
+<!--            <div class="helptext" id="id_image_helptext">이미지 파일을 선택해주세요.</div>-->
+<!--            <input type="file" name="image" accept="image/*" id="id_image"/>-->
+<!--        </div>-->
+        </table>
+        <input id="create_post_url" type="hidden" value="{% url 'post/create' %}">
+        <input id="post_add_btn" type="button" value="등록" onclick="post_create()">
+    </form>
+</div>
+{% endblock %}

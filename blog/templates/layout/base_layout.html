@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>블로그</title>
+    {% include 'layout/head_layout.html' %}
+</head>
+<body>
+    <div id="top_area">
+        {% include 'layout/top_layout.html' %}
+    </div>
+    <div id="content_area">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
