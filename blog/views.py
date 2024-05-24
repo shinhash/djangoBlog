@@ -134,3 +134,18 @@ def post_delete(request):
         }
         return JsonResponse(context)
     return redirect('post/detail')
+
+
+def custom_handler400(request):
+    context = {}
+    return render(request, 'error/400_error.html', context)
+
+
+def custom_handler404(request):
+    context = {}
+    return render(request, 'error/404_error.html', context)
+
+
+def custom_handler500(request):
+    context = {}
+    return render(request, 'error/500_error.html', context)
