@@ -1,13 +1,17 @@
 from math import ceil
-
 from django.core.files.storage import FileSystemStorage
-from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.template import RequestContext
 from django.template.loader import render_to_string
 
 from blog.utils import dict_sql_post, image_path_rename
 import json
+
+
+def post_test(request):
+    context = {}
+    return render(request, 'post/views/post_create.html', context)
 
 
 def post_create(request):
@@ -135,17 +139,3 @@ def post_delete(request):
         return JsonResponse(context)
     return redirect('post/detail')
 
-
-def custom_handler400(request):
-    context = {}
-    return render(request, 'error/400_error.html', context)
-
-
-def custom_handler404(request):
-    context = {}
-    return render(request, 'error/404_error.html', context)
-
-
-def custom_handler500(request):
-    context = {}
-    return render(request, 'error/500_error.html', context)
