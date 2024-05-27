@@ -64,8 +64,8 @@
 
 {% if query_id == 'generatePostId' %}
     SELECT    CASE WHEN MAX(POST_ID) IS NOT NULL
-                   THEN CONCAT('P', DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i'), (SUBSTR(MAX(POST_ID), 15, 3)+1))
-                   ELSE CONCAT('P', DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i'), '001')
+                   THEN CONCAT('P', DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i'), '_', (LPAD((SUBSTR(MAX(POST_ID), 15, 3) + 1), 3, '0')) )
+                   ELSE CONCAT('P', DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i'), '_001')
                    END AS POST_ID
       FROM HASH_SERVER.POST
      WHERE 1 = 1

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    {% include 'login/layout/head_layout.html' %}
+</head>
+<body>
+    <div id="top_area">
+        {% include 'login/layout/top_layout.html' %}
+    </div>
+    <div id="content_area">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
