@@ -71,29 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# sqlite3 setting
-# DATABASES = {
-#     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'HASH_SERVER',
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '3309'
-    }
-}
+ASGI_APPLICATION = 'config.asgi.application'
 
 
 # Password validation
@@ -147,3 +125,85 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # session cookie time
 # SESSION_COOKIE_AGE = 30
+
+
+# DEV OR PROD SETTINGS INFO
+
+# Database
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+# sqlite3 setting
+# DATABASES = {
+#     'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'HASH_SERVER',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '3309'
+    }
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[%(asctime)s] %(levelname)s [%(module)s:%(name)s:%(lineno)s] ::>> %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/logger.log',        # message가 저장될 파일명(파일명 변경 가능)
+            'formatter': 'verbose'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+        'django.request': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+        'django.server': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+        'django.template': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+        'django.db.backends': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+        'django.security': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+        'login': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+    }
+}

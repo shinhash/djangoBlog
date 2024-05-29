@@ -4,6 +4,9 @@ from django.template.loader import render_to_string
 
 from login.utils import dict_sql_login
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 # Create your views here.
 def login_page(request):
@@ -15,7 +18,6 @@ def login_page(request):
 
 def login_process(request):
     if request.method == 'POST':
-
         login_id = request.POST.get('login_id')
         login_pw = request.POST.get('login_pw')
 
@@ -24,9 +26,11 @@ def login_process(request):
             'login_id': login_id
         }
         sql = render_to_string('login/model/sql/login.sql', query_params)
-        print('sql : ', sql)
+        logger.debug('login sql logger')
+        logger.debug(sql)
+
         user_info_data = dict_sql_login(sql)
-        print('user_info : ', user_info)
+        logger.debug(user_info_data)
 
         login_result = 'FAIL'
         error_code = ''
@@ -51,6 +55,7 @@ def login_process(request):
 
 def main_page(request):
     context = {}
+    logger.info('main page test')
     return render(request, 'login/views/main.html', context)
 
 
