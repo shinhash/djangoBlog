@@ -10,7 +10,7 @@
            , MOD_USER_ID
            , MOD_IP
            , USE_YN
-      FROM HASH_SERVER.POST
+      FROM DJANGO_MARIADB.POST
      WHERE 1 = 1
        AND USE_YN = 'Y'
     {% if board_id %}
@@ -33,7 +33,7 @@
            , MOD_USER_ID
            , MOD_IP
            , USE_YN
-      FROM HASH_SERVER.POST
+      FROM DJANGO_MARIADB.POST
      WHERE 1 = 1
     {% if board_id %}
         AND BOARD_ID = '{{ board_id }}'
@@ -45,7 +45,7 @@
 
 
 {% if query_id == 'deletePost' %}
-    UPDATE HASH_SERVER.POST
+    UPDATE DJANGO_MARIADB.POST
        SET USE_YN = 'N'
      WHERE POST_ID = '{{ post_id }}'
 {% endif %}
@@ -53,7 +53,7 @@
 
 {% if query_id == 'selectPostCount' %}
     SELECT COUNT(1) as POST_CNT
-      FROM HASH_SERVER.POST
+      FROM DJANGO_MARIADB.POST
      WHERE 1 = 1
        AND USE_YN = 'Y'
     {% if board_id %}
@@ -67,7 +67,7 @@
                    THEN CONCAT('P', DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i'), '_', (LPAD((SUBSTR(MAX(POST_ID), 15, 3) + 1), 3, '0')) )
                    ELSE CONCAT('P', DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i'), '_001')
                    END AS POST_ID
-      FROM HASH_SERVER.POST
+      FROM DJANGO_MARIADB.POST
      WHERE 1 = 1
        AND BOARD_ID = '{{ board_id }}'
        AND DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i') = SUBSTR(POST_ID,2,12)
@@ -75,7 +75,7 @@
 
 
 {% if query_id == 'insertPost' %}
-     INSERT INTO HASH_SERVER.POST(
+     INSERT INTO DJANGO_MARIADB.POST(
                       BOARD_ID
                     , POST_ID
                     , POST_TITLE

@@ -10,7 +10,7 @@
            , MOD_IP
            , USE_YN
            , SNS_SIGN_ID
-      FROM HASH_SERVER.USERS
+      FROM DJANGO_MARIADB.USERS
      WHERE USE_YN = 'Y'
      {% if login_id %}
        AND USER_ID = '{{ login_id }}'

@@ -143,7 +143,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'HASH_SERVER',
+        'NAME': 'DJANGO_MARIADB',
         'USER': 'root',
         'PASSWORD': '1234',
         'HOST': 'localhost',
@@ -167,7 +167,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'logs/logger.log',        # message가 저장될 파일명(파일명 변경 가능)
+            'filename': 'logs/logger.log',
             'formatter': 'verbose'
         },
         'console': {
@@ -177,10 +177,10 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-        },
+        # 'django': {
+        #     'handlers': ['console', 'file'],
+        #     'level': 'DEBUG',
+        # },
         'django.request': {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
