@@ -10,6 +10,7 @@ def myInterceptor(get_response):
         if (
                 request.path != '/login/login_page/'
                 and request.path != '/login/login_process/'
+                and request.path != '/login/logout_process/'
                 and request.path != '/login/main_page/'
         ):
             sign_session = request.session.get('sign_session')

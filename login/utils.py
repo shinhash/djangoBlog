@@ -3,7 +3,7 @@ from uuid import uuid4
 from django.db import connections
 
 
-def dict_sql_login(sql, using='default'):
+def dict_sql_login(sql, using='mariaDB'):
     with connections[using].cursor() as cursor:
         cursor.execute(sql)
         desc = cursor.description
@@ -22,7 +22,7 @@ def image_path_rename(filename):
     return file_trance_name
 
 
-def dict_fetchall(sql, using='mariadb'):
+def dict_fetchall(sql, using='mariaDB'):
     with connections[using].cursor() as cursor:
         cursor.execute(sql)
         desc = cursor.description

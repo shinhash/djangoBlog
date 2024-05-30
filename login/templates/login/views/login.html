@@ -36,6 +36,8 @@
     <div>
         <img id="loading-bar" src="{% static 'login/img/loading_img.gif' %}" style="display: none">
     </div>
-    {{ request.session.sign_session }}
+        {% if 'sign_session' in request.session %}
+            {{ request.session.sign_session }}
+        {% endif %}
 </body>
 </html>

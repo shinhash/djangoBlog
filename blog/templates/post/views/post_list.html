@@ -2,11 +2,6 @@
 {% load static %}
 {% block content %}
 {% for post in post_list %}
-<div class="hidden_field">
-    <input type="hidden" id="list_post_url" value="{% url 'post/list' %}">
-    <input type="hidden" id="detail_post_url" value="{% url 'post/detail' %}">
-    <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
-</div>
 <div class="row restaurant-item" style="margin:20px auto;">
     <div class="col-sm-12">
         <div class="card border-secondary">
@@ -16,6 +11,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{ post.REG_USER_ID }}</h6>
                 <a href="javascript:" onclick="detail_view('{{ post.POST_ID }}')" class="card-link">상세보기</a>
             </div>
+            <a href="{% url 'detail_temp' post_id=post.POST_ID %}" >상세보기 다른버전</a>
         </div>
     </div>
 </div>

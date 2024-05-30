@@ -3,7 +3,7 @@ from uuid import uuid4
 from django.db import connections
 
 
-def dict_sql_post(sql, using='default'):
+def dict_sql_post(sql, using='mariaDB'):
     with connections[using].cursor() as cursor:
         cursor.execute(sql)
         desc = cursor.description

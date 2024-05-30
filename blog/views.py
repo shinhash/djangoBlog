@@ -8,6 +8,9 @@ from django.template.loader import render_to_string
 from blog.utils import dict_sql_post, image_path_rename
 import json
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 def post_test(request):
     context = {}
@@ -31,6 +34,10 @@ def post_create(request):
         }
         sql = render_to_string('post/model/sql/post.sql', query_params)
         post_id = dict_sql_post(sql)[0].get('POST_ID')
+        logger.debug('sql')
+        logger.debug(sql)
+        logger.debug('post_id')
+        logger.debug(post_id)
 
         post_title = request.POST.get('post_title')
         post_cont = request.POST.get('post_cont')
@@ -45,6 +52,7 @@ def post_create(request):
         sql = render_to_string('post/model/sql/post.sql', query_params)
         result = dict_sql_post(sql)
 
+        logger.debug(post_id)
         context = {
             'result': 'SUCCESS',
             'post_id': post_id,
@@ -100,7 +108,7 @@ def post_list(request):
 def post_detail(request):
     if request.method == 'POST':
         post_id = request.POST.get('post_id')
-        print("detail post_id = ", post_id)
+
         query_params = {
             'query_id': 'selectPostDetail',
             'board_id': 'BD001',
@@ -114,6 +122,22 @@ def post_detail(request):
         }
         return render(request, 'post/views/post_detail.html', context)
     return redirect('post/list')
+
+
+def post_detail_temp(request, post_id):
+    print('post_id : ', post_id)
+    query_params = {
+        'query_id': 'selectPostDetail',
+        'board_id': 'BD001',
+        'post_id': post_id,
+    }
+    sql = render_to_string('post/model/sql/post.sql', query_params)
+    result = dict_sql_post(sql)[0]
+    print("result = ", result)
+    context = {
+        'post': result
+    }
+    return render(request, 'post/views/post_detail.html', context)
 
 
 def post_update(request):

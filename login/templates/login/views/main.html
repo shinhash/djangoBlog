@@ -4,8 +4,15 @@
 <div>
     <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
     <div>
-        {{ request.session.sign_session }}
+        {% if 'sign_session' in request.session %}
+            {{ request.session.sign_session }}
+        {% endif %}
     </div>
-    <input type="button" value="log out" onclick="logout_process()" />
+    {% if 'sign_session' in request.session %}
+        <input type="button" value="로그아웃" onclick="logout_process()" />
+    {% else %}
+        <input type="button" value="로그인" onclick="login_page()" />
+    {% endif %}
+
 </div>
 {% endblock %}

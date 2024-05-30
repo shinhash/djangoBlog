@@ -30,21 +30,20 @@ def login_process(request):
         logger.debug(sql)
 
         user_info_data = dict_sql_login(sql)
-        logger.debug(user_info_data)
 
         login_result = 'FAIL'
-        error_code = ''
-
+        error_code = 'LOGIN_ID_NE'
         if user_info_data is not None and len(user_info_data) > 0:
             user_info_data = user_info_data[0]
             if login_pw == user_info_data.get('USER_PW'):
                 login_result = 'SUCCESS'
 
                 request.session['sign_session'] = login_id
-                print('sign_user_id : ', request.session.get('sign_session'))
+                # logger.debug('sign_user_id : ', request.session.get('sign_session'))
             else:
                 error_code = 'LOGIN_PW_NE'
-
+        else:
+            print('')
         context = {
             'result': login_result,
             'error_code': error_code,

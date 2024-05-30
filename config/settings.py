@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+from datetime import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-kp9gi#8(zte1cre%r1^e%fzvx#%cpr8)$15y4dp6n(c^qn7(01
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -146,10 +147,22 @@ DATABASES = {
         'NAME': 'DJANGO_MARIADB',
         'USER': 'root',
         'PASSWORD': '1234',
-        'HOST': 'localhost',
+        'HOST': '192.168.56.1',
         'PORT': '3309'
-    }
+    },
+    'mariaDB': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'DJANGO_MARIADB',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': '192.168.56.1',
+        'PORT': '3309'
+    },
 }
+
+LOG_FILE_NAME = f"djangoBlog_{datetime.now().strftime('%Y-%m-%d')}.log"
+LOG_FILE_PATH = os.path.join('logs', LOG_FILE_NAME)
+os.makedirs(os.path.dirname(LOG_FILE_PATH), exist_ok=True)
 
 LOGGING = {
     'version': 1,
@@ -167,7 +180,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'logs/logger.log',
+            'filename': LOG_FILE_PATH,
             'formatter': 'verbose'
         },
         'console': {
@@ -202,6 +215,10 @@ LOGGING = {
             'level': 'DEBUG',
         },
         'login': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+        'blog': {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
         },
